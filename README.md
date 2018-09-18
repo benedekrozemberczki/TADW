@@ -2,7 +2,7 @@ TADW
 ============================================
 <p align="justify">
 An implementation of "Network Representation Learning with Rich Text Information". Text Attribtued Deep Walk (TADW) is a node embedding algorithm which learns an embedding of nodes and fuses the node representations with node attributes. The procedure places nodes in an abstract feature space where information about a fixed order procimity is preserved and attributes of neighbours within the proximity are also part of the representation. TADW learns the joint feature-proximal representations using regularized non-negative matrix factorization. In our implementation we assumed that the proximity matrix used in the approximation is sparse, hence the solution runtime can be linear in the number of nodes for low proximity. For a large proximity order value (which is larger than the graph diameter) the runtime is quadratic. We did not make any assumptions about the sparsity of the feature matrix.</p>
-<div style="text-align:center"><img src ="fscnmf.jpeg" ,width=720/></div>
+<div style="text-align:center"><img src ="fscnmf.png" ,width=720/></div>
 
 This repository provides an implementation for TADW as described in the paper:
 > Network Representation Learning with Rich Text Information.
