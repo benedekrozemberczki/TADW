@@ -44,15 +44,10 @@ Learning of the embedding is handled by the `src/main.py` script which provides 
 
 ```
   --dimensions INT         Number of embeding dimensions.                     Default is 32.
-  --order INT              Order of adjacency matrix powers.                  Default is 3.
-  --iterations INT         Number of power interations.                       Default is 500.
-  --alpha_1 FLOAT          Alignment parameter for adjacency matrix.          Default is 1000.0.
-  --alpha_2 FLOAT          Adjacency basis regularization.                    Default is 1.0.
-  --alpha_3 FLOAT          Adjacency features regularization.                 Default is 1.0.
-  --beta_1  FLOAT          Alignment parameter for feature matrix.            Default is 1000.0.
-  --beta_2  FLOAT          Attribute basis regularization .                   Default is 1.0.
-  --beta_3  FLOAT          Attribute feature regularization.                  Default is 1.0.
-  --gamma FLOAT            Embedding mixing parameter.                        Default is 0.5.  
+  --order INT              Order of adjacency matrix powers.                  Default is 2.
+  --iterations INT         Number of gradient descent interations.            Default is 20.
+  --alpha FLOAT            Learning rate.                                     Default is 10**-8.
+  --lambd FLOAT            Regularization term coefficient.                   Default is 1000.0.  
   --lower-control FLOAT    Overflow control parameter.                        Default is 10**-15.  
 ```
 
@@ -60,21 +55,21 @@ Learning of the embedding is handled by the `src/main.py` script which provides 
 
 The following commands learn a graph embedding and write the embedding to disk. The node representations are ordered by the ID.
 
-Creating aN FSCNMF embedding of the default dataset with the default hyperparameter settings. Saving the embedding at the default path.
+Creating a TADW embedding of the default dataset with the default hyperparameter settings. Saving the embedding at the default path.
 
 ```
 python src/main.py
 ```
-Creating an FSCNMF embedding of the default dataset with 128 dimensions and approximation order 1.
+Creating a TADW embedding of the default dataset with 128x2 dimensions and approximation order 1.
 
 ```
 python src/main.py --dimensions 128 --order 1
 ```
 
-Creating an FSCNMF embedding of the default dataset with asymmetric mixing.
+Creating a TADW  embedding with high regularization.
 
 ```
-python src/main.py --gamma 0.1
+python src/main.py --lambd 2000
 ```
 
 Creating an embedding of an other dataset the `Wikipedia Dogs`. Saving the output in a custom folder.
