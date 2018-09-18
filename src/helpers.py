@@ -39,8 +39,8 @@ def parameter_parser():
 
     parser.add_argument('--order',
                         type = int,
-                        default = 4,
-	                help = 'Target matrix approximation order. Default is 4.')
+                        default = 2,
+	                help = 'Target matrix approximation order. Default is 2.')
 
     parser.add_argument('--iterations',
                         type = int,
@@ -50,7 +50,7 @@ def parameter_parser():
     parser.add_argument('--lambd',
                         type = float,
                         default = 1000.0,
-	                help = 'Regularization term. Default is 1000.')
+	                help = 'Regularization term coefficient. Default is 1000.')
 
     parser.add_argument('--alpha',
                         type = float,
