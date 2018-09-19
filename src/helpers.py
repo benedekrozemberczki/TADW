@@ -67,6 +67,9 @@ def parameter_parser():
 
 def normalize_adjacency(graph):
     """
+    Method to calculate a sparse degree normalized adjacency matrix.
+    :param graph: Sparse graph adjacency matrix.
+    :return A: Normalized adjacency matrix.
     """
     ind = range(len(graph.nodes()))
     degs = [1.0/graph.degree(node) for node in graph.nodes()]
