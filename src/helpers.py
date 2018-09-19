@@ -101,6 +101,9 @@ def read_graph(edge_path, order):
 
 def read_features(feature_path):
     """
+    Method to get nod feaures.
+    :param feature_path: Path to the node features.
+    :return X: Node features.
     """
     features = pd.read_csv(feature_path)
     X = np.array(features)[:,1:]
@@ -112,7 +115,6 @@ def tab_printer(args):
     :param args: Parameters used for the model.
     """
     args = vars(args)
-
     t = Texttable() 
     t.add_rows([["Parameter", "Value"]] +  [[k.replace("_"," ").capitalize(),v] for k,v in args.iteritems()])
     print t.draw()
