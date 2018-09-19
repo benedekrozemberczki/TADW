@@ -80,6 +80,10 @@ def normalize_adjacency(graph):
 
 def read_graph(edge_path, order):
     """
+    Method to read graph and create a target matrix with pooled adjacency matrix powers up to the order.
+    :param edge_path: Path to the ege list.
+    :param order: Order of approximations.
+    :return out_A: Target matrix.
     """
     print("Target matrix creation started.")
     graph = nx.from_edgelist(pd.read_csv(edge_path).values.tolist())
