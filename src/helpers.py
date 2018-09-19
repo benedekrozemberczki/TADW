@@ -14,7 +14,7 @@ def parameter_parser():
     Representations are sorted by node ID.
     """
 
-    parser = argparse.ArgumentParser(description = "Run FSCNMF.")
+    parser = argparse.ArgumentParser(description = "Run TADW.")
 
 
     parser.add_argument('--edge-path',
