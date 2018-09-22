@@ -106,7 +106,7 @@ def read_graph(edge_path, order):
 
 def read_features(feature_path):
     """
-    Method to get node feaures.
+    Method to get dense node feaures.
     :param feature_path: Path to the node features.
     :return features: Node features.
     """
@@ -116,24 +116,18 @@ def read_features(feature_path):
 
 def read_sparse_features(feature_path):
     """
-
-    :param feature_path:
-    :return features:
+    Method to get sparse node feaures.
+    :param feature_path:  Path to the node features.
+    :return features: Node features.
     """
-
     features = json.load(open(feature_path))
-
     index_1 = [fet for k,v in features.iteritems() for fet in v]
     index_2 = [int(k) for k,v in features.iteritems() for fet in v]
     values = [1.0]*len(index_1) 
-
-
     nodes = map(lambda x: int(x),features.keys())
     node_count = max(nodes)+1
-
     features = [map(lambda x: int(x),feature_set) for node, feature_set in features.iteritems()]
-    feature_count = max(map(lambda x: max(x+[0]),features))+1
-
+    feature_count = max(map(lambda x: max(x+[0]), features)) + 1
     features = sparse.csr_matrix(sparse.coo_matrix((values,(index_1,index_2)),shape=(feature_count,node_count),dtype=np.float32))
     return features
 
