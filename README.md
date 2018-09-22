@@ -37,6 +37,16 @@ The feature matrix can be stored two ways, if the feature matrix is sparse nodes
   "node_3": [],
   "node_n": ["feature_2018","Feature_10001"]}
 ```
+If the feature matrix is dense it is assumed that it is stored as csv with coma separators and sorted by node ids and looks like this:
+
+| NODE ID| Feature 1 | Feature 2 | Feature 3 | Feature 4  |
+| --- | --- | --- | --- |--- |
+| 0 | 1 |0 |1 |1 |
+| 1 | 1 |0 |1 |1 |
+| 2 | 1 |0 |1 |1 |
+| 3 | 1 |0 |1 |1 |
+| ... | ... |... |... |... |
+| n | 1 |0 |1 |1 |
 
 ### Options
 
