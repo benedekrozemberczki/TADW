@@ -27,7 +27,13 @@ argparse          1.1.0
 
 ### Datasets
 
-The code takes an input graph in a csv file. Every row indicates an edge between two nodes separated by a comma. The first row is a header. Nodes should be indexed starting with 0. A sample graph for the `Wikipedia Giraffes` is included in the  `input/` directory.
+The code takes an input graph in a csv file. Every row indicates an edge between two nodes separated by a comma. The first row is a header. Nodes should be indexed starting with 0. A sample graph for the `Wikipedia Chameleons` is included in the  `input/` directory. 
+
+The feature matrix can be stored two ways, if the feature matrix is sparse:
+
+```javascript
+{ "some": "json" }
+```
 
 ### Options
 
