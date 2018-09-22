@@ -40,7 +40,7 @@ If the feature matrix is a **sparse binary** one it is stored as a json. Nodes a
   ...
   n: [2018, 10000]}
 ```
-If the feature matrix is **dense** it is assumed that it is stored as csv with comma separators. It has a header, the first collumn contains node identifiers and it is sorted by these identifers. It should look like this:
+If the feature matrix is **dense** it is assumed that it is stored as csv with comma separators. It has a header, the first column contains node identifiers and it is sorted by these identifers. It should look like this:
 
 | **NODE ID**| **Feature 1** | **Feature 2** | **Feature 3** | **Feature 4** |
 | --- | --- | --- | --- |--- |
