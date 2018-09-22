@@ -27,7 +27,7 @@ argparse          1.1.0
 
 ### Datasets
 
-The code takes an input graph in a csv file. Every row indicates an edge between two nodes separated by a comma. The first row is a header. Nodes should be indexed starting with 0. A sample graph for the `Wikipedia Chameleons` is included in the  `input/` directory. 
+The code takes an input graph in a csv file. Every row indicates an edge between two nodes separated by a comma. The first row is a header. Nodes should be indexed starting with 0. Sample graphs for the `Wikipedia Chameleons` and `Wikipedia Giraffes` are included in the  `input/` directory. 
 
 The feature matrix can be stored two ways:
 
@@ -57,9 +57,9 @@ Learning of the embedding is handled by the `src/main.py` script which provides 
 #### Input and output options
 
 ```
-  --edge-path STR           Input graph path.           Default is `input/giraffe_edges.csv`.
-  --feature-path STR        Input Features path.        Default is `input/giraffe_features.csv`.
-  --output-path STR         Embedding path.             Default is `output/giraffe_fscnmf.csv`.
+  --edge-path STR           Input graph path.           Default is `input/chameleon_edges.csv`.
+  --feature-path STR        Input Features path.        Default is `input/chameleon_features.json`.
+  --output-path STR         Embedding path.             Default is `output/chameleon_tawd.csv`.
 ```
 
 #### Model options
@@ -68,9 +68,10 @@ Learning of the embedding is handled by the `src/main.py` script which provides 
   --dimensions INT         Number of embeding dimensions.                     Default is 32.
   --order INT              Order of adjacency matrix powers.                  Default is 2.
   --iterations INT         Number of gradient descent interations.            Default is 20.
-  --alpha FLOAT            Learning rate.                                     Default is 10**-8.
+  --alpha FLOAT            Learning rate.                                     Default is 10**-6.
   --lambd FLOAT            Regularization term coefficient.                   Default is 1000.0.  
-  --lower-control FLOAT    Overflow control parameter.                        Default is 10**-15.  
+  --lower-control FLOAT    Overflow control parameter.                        Default is 10**-15.
+  --features STR           Structure of the feature matrix.                   Default is `sparse`. 
 ```
 
 ### Examples
@@ -94,8 +95,8 @@ Creating a TADW  embedding with high regularization.
 python src/main.py --lambd 2000
 ```
 
-Creating an embedding of an other dataset the `Wikipedia Dogs`. Saving the output in a custom folder.
+Creating an embedding of an other dataset with dense features the `Wikipedia Giraffes`. Saving the output in a custom folder.
 
 ```
-python src/main.py --edge-path input/dog_edges.csv --feature-path input/dog_features.csv --output-path output/dog_fscnmf.csv
+python src/main.py --edge-path input/dog_edges.csv --feature-path input/dog_features.csv --output-path output/dog_fscnmf.csv --features dense
 ```
