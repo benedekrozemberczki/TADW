@@ -2,6 +2,7 @@ import argparse
 import networkx as nx
 import pandas as pd
 import numpy as np
+import json
 from scipy import sparse
 from tqdm import tqdm
 from texttable import Texttable
@@ -9,7 +10,7 @@ from texttable import Texttable
 def parameter_parser():
 
     """
-    A method to parse up command line parameters. By default it gives an embedding of the Wiki Giraffes.
+    A method to parse up command line parameters. By default it gives an embedding of the Wiki Chameleons.
     The default hyperparameters give a good quality representation without grid search.
     Representations are sorted by node ID.
     """
@@ -19,17 +20,17 @@ def parameter_parser():
 
     parser.add_argument('--edge-path',
                         nargs = '?',
-                        default = './input/giraffe_edges.csv',
+                        default = './input/chameleon_edges.csv',
 	                help = 'Input edges.')
 
     parser.add_argument('--feature-path',
                         nargs = '?',
-                        default = './input/giraffe_features.csv',
+                        default = './input/chameleon_features.json',
 	                help = 'Input features.')
 
     parser.add_argument('--output-path',
                         nargs = '?',
-                        default = './output/giraffe_tadw.csv',
+                        default = './output/chameleon_tadw.csv',
 	                help = 'Output embedding.')
 
     parser.add_argument('--dimensions',
@@ -54,9 +55,13 @@ def parameter_parser():
 
     parser.add_argument('--alpha',
                         type = float,
-                        default = 10**-8,
-	                help = 'Learning rate. Default is 10^-8.')
+                        default = 10**-6,
+	                help = 'Learning rate. Default is 10^-6.')
 
+    parser.add_argument('--features',
+                        nargs = '?',
+                        default = 'sparse',
+	                help = 'Output embedding.')
 
     parser.add_argument('--lower-control',
                         type = float,
@@ -101,13 +106,36 @@ def read_graph(edge_path, order):
 
 def read_features(feature_path):
     """
-    Method to get nod feaures.
+    Method to get node feaures.
     :param feature_path: Path to the node features.
-    :return X: Node features.
+    :return features: Node features.
     """
     features = pd.read_csv(feature_path)
-    X = np.array(features)[:,1:]
-    return X
+    features = np.array(features)[:,1:].transpose()
+    return features
+
+def read_sparse_features(feature_path):
+    """
+
+    :param feature_path:
+    :return features:
+    """
+
+    features = json.load(open(feature_path))
+
+    index_1 = [fet for k,v in features.iteritems() for fet in v]
+    index_2 = [int(k) for k,v in features.iteritems() for fet in v]
+    values = [1.0]*len(index_1) 
+
+
+    nodes = map(lambda x: int(x),features.keys())
+    node_count = max(nodes)+1
+
+    features = [map(lambda x: int(x),feature_set) for node, feature_set in features.iteritems()]
+    feature_count = max(map(lambda x: max(x+[0]),features))+1
+
+    features = sparse.csr_matrix(sparse.coo_matrix((values,(index_1,index_2)),shape=(feature_count,node_count),dtype=np.float32))
+    return features
 
 def tab_printer(args):
     """

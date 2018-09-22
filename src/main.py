@@ -1,5 +1,5 @@
-from tadw import TADW
-from helpers import parameter_parser, read_graph, read_features, tab_printer
+from tadw import DenseTADW, SparseTADW
+from helpers import parameter_parser, read_graph, read_features, read_sparse_features, tab_printer
 
 def learn_model(args):
     """
@@ -7,8 +7,12 @@ def learn_model(args):
     :param args: Arguments object.
     """
     A = read_graph(args.edge_path, args.order)
-    X = read_features(args.feature_path)
-    model = TADW(A, X, args)
+    if args.features == "dense":
+        X = read_features(args.feature_path)
+        model = DenseTADW(A, X, args)
+    elif args.features == "sparse":
+        X = read_sparse_features(args.feature_path)
+        model = SparseTADW(A, X, args)
     model.optimize()
     model.save_embedding()
 
