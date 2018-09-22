@@ -34,10 +34,11 @@ The feature matrix can be stored two ways:
 If the feature matrix is a **sparse binary** one it is stored as a json. Nodes are keys of the json and features are the values. For each node feature column ids are stored as elements of a list. The feature matrix is structured as:
 
 ```javascript
-{ "node_1": ["feature_1","feature_38", "feature_40", "feature_207"],
-  "node_2": ["feature_10000","feature_2","feature_30"],
-  "node_3": [],
-  "node_n": ["feature_2018","Feature_10001"]}
+{ 0: [0,1,38, 1968, 2000, 52727],
+  1: [10000,20,3],
+  2: [],
+  ...
+  n: [2018,10000]}
 ```
 If the feature matrix is **dense** it is assumed that it is stored as csv with coma separators. It has a header, the first collumn contains node identifiers and it is sorted by these identifers. It should look like this:
 
