@@ -32,7 +32,10 @@ The code takes an input graph in a csv file. Every row indicates an edge between
 The feature matrix can be stored two ways, if the feature matrix is sparse nodes are keys of the json stroing while the features are the values. For each node feature column ids are stored as elements of a list. The feature matrix is structured as:
 
 ```javascript
-{ "node_1": ["","","",""],"node_1": ["","","",""] }
+{ "node_1": ["feature_1","feature_38", "feature_40", "feature_207"],
+  "node_2": ["feature_10000","feature_2","feature_30"],
+  "node_3": [],
+  "node_n": ["feature_2018","Feature_10001"]}
 ```
 
 ### Options
