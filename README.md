@@ -29,7 +29,7 @@ argparse          1.1.0
 
 The code takes an input graph in a csv file. Every row indicates an edge between two nodes separated by a comma. The first row is a header. Nodes should be indexed starting with 0. A sample graph for the `Wikipedia Chameleons` is included in the  `input/` directory. 
 
-The feature matrix can be stored two ways, if the feature matrix is sparse nodes are keys of the json stroing while the features are the values. For each node feature column ids are stored as elements of a list. The feature matrix is structured as:
+The feature matrix can be stored two ways. If the feature matrix is a sparsebinary one it is stored as a json. Nodes are keys of the json and features are the values. For each node feature column ids are stored as elements of a list. The feature matrix is structured as:
 
 ```javascript
 { "node_1": ["feature_1","feature_38", "feature_40", "feature_207"],
@@ -37,9 +37,9 @@ The feature matrix can be stored two ways, if the feature matrix is sparse nodes
   "node_3": [],
   "node_n": ["feature_2018","Feature_10001"]}
 ```
-If the feature matrix is dense it is assumed that it is stored as csv with coma separators and sorted by node ids and looks like this:
+If the feature matrix is dense it is assumed that it is stored as csv with coma separators. It has a header, the first collumn contains node identifiers and it is sorted by these identifers. It should look like this:
 
-| NODE ID| Feature 1 | Feature 2 | Feature 3 | Feature 4  |
+| **NODE ID**| **Feature 1** | **Feature 2** | **Feature 3** | **Feature 4** |
 | --- | --- | --- | --- |--- |
 | 0 | 0 |0 |1 |1 |
 | 1 | 1 |1 |0 |1 |
