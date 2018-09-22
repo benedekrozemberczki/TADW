@@ -34,7 +34,7 @@ The feature matrix can be stored two ways:
 If the feature matrix is a **sparse binary** one it is stored as a json. Nodes are keys of the json and features are the values. For each node feature column ids are stored as elements of a list. The feature matrix is structured as:
 
 ```javascript
-{ 0: [0,1,38, 1968, 2000, 52727],
+{ 0: [0, 1, 38, 1968, 2000, 52727],
   1: [10000, 20, 3],
   2: [],
   ...
