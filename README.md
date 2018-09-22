@@ -41,10 +41,10 @@ If the feature matrix is dense it is assumed that it is stored as csv with coma 
 
 | NODE ID| Feature 1 | Feature 2 | Feature 3 | Feature 4  |
 | --- | --- | --- | --- |--- |
-| 0 | 1 |0 |1 |1 |
-| 1 | 1 |0 |1 |1 |
-| 2 | 1 |0 |1 |1 |
-| 3 | 1 |0 |1 |1 |
+| 0 | 0 |0 |1 |1 |
+| 1 | 1 |1 |0 |1 |
+| 2 | 0 |0 |1 |1 |
+| 3 | 1 |1 |1 |1 |
 | ... | ... |... |... |... |
 | n | 1 |0 |1 |1 |
 
