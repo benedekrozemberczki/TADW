@@ -35,10 +35,10 @@ If the feature matrix is a **sparse binary** one it is stored as a json. Nodes a
 
 ```javascript
 { 0: [0,1,38, 1968, 2000, 52727],
-  1: [10000,20,3],
+  1: [10000, 20, 3],
   2: [],
   ...
-  n: [2018,10000]}
+  n: [2018, 10000]}
 ```
 If the feature matrix is **dense** it is assumed that it is stored as csv with coma separators. It has a header, the first collumn contains node identifiers and it is sorted by these identifers. It should look like this:
 
