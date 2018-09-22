@@ -45,11 +45,11 @@ If the feature matrix is **dense** it is assumed that it is stored as csv with c
 | **NODE ID**| **Feature 1** | **Feature 2** | **Feature 3** | **Feature 4** |
 | --- | --- | --- | --- |--- |
 | 0 | 3 |0 |1.37 |1 |
-| 1 | 1 |1 |2.54 |1 |
-| 2 | 2 |0 |1.08 |1 |
-| 3 | 1 |1 |1.22 |1 |
+| 1 | 1 |1 |2.54 |-11 |
+| 2 | 2 |0 |1.08 |-12 |
+| 3 | 1 |1 |1.22 |-4 |
 | ... | ... |... |... |... |
-| n | 5 |0 |2.47 |1 |
+| n | 5 |0 |2.47 |21 |
 
 ### Options
 
