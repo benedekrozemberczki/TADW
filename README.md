@@ -99,5 +99,5 @@ python src/main.py --lambd 2000
 Creating an embedding of an other dataset with dense features the `Wikipedia Giraffes`. Saving the output in a custom folder.
 
 ```
-python src/main.py --edge-path input/dog_edges.csv --feature-path input/dog_features.csv --output-path output/dog_fscnmf.csv --features dense
+python src/main.py --edge-path input/giraffe_edges.csv --feature-path input/giraffe_features.csv --output-path output/giraffe_tadw.csv --features dense
 ```
