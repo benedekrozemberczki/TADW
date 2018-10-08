@@ -58,21 +58,21 @@ Learning of the embedding is handled by the `src/main.py` script which provides 
 #### Input and output options
 
 ```
-  --edge-path STR           Input graph path.           Default is `input/chameleon_edges.csv`.
-  --feature-path STR        Input Features path.        Default is `input/chameleon_features.json`.
-  --output-path STR         Embedding path.             Default is `output/chameleon_tadw.csv`.
+  --edge-path      STR      Input graph path.           Default is `input/chameleon_edges.csv`.
+  --feature-path   STR      Input Features path.        Default is `input/chameleon_features.json`.
+  --output-path    STR      Embedding path.             Default is `output/chameleon_tadw.csv`.
 ```
 
 #### Model options
 
 ```
-  --dimensions INT         Number of embeding dimensions.                     Default is 32.
-  --order INT              Order of adjacency matrix powers.                  Default is 2.
-  --iterations INT         Number of gradient descent interations.            Default is 20.
-  --alpha FLOAT            Learning rate.                                     Default is 10**-6.
-  --lambd FLOAT            Regularization term coefficient.                   Default is 1000.0.  
-  --lower-control FLOAT    Overflow control parameter.                        Default is 10**-15.
-  --features STR           Structure of the feature matrix.                   Default is `sparse`. 
+  --dimensions     INT        Number of embeding dimensions.                     Default is 32.
+  --order          INT        Order of adjacency matrix powers.                  Default is 2.
+  --iterations     INT        Number of gradient descent interations.            Default is 20.
+  --alpha          FLOAT      Learning rate.                                     Default is 10**-6.
+  --lambd          FLOAT      Regularization term coefficient.                   Default is 1000.0.  
+  --lower-control  FLOAT      Overflow control parameter.                        Default is 10**-15.
+  --features       STR        Structure of the feature matrix.                   Default is `sparse`. 
 ```
 
 ### Examples
