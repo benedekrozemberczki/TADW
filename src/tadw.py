@@ -54,7 +54,7 @@ class TADW(object):
         """
         t = Texttable() 
         t.add_rows([["Iteration", "Main loss","Regularization loss I.","Regularization loss II."]] +  self.losses)
-        print t.draw()
+        print(t.draw())
 
     def optimize(self):
         """
@@ -78,7 +78,7 @@ class TADW(object):
         Saving the embedding on disk.
         """
         print("\nSaving the embedding.\n")
-        columns = ["id"] + map(lambda x: "X_"+str(x),range(2*self.args.dimensions))
+        columns = ["id"] + ["X_"+str(dim) for dim in range(2*self.args.dimensions)]
         ids = np.array(range(0,self.A.shape[0])).reshape(-1,1)
         self.W = self.compile_embedding(ids)
         self.out = pd.DataFrame(self.W, columns = columns)

@@ -121,13 +121,13 @@ def read_sparse_features(feature_path):
     :return features: Node features.
     """
     features = json.load(open(feature_path))
-    index_1 = [fet for k,v in features.iteritems() for fet in v]
-    index_2 = [int(k) for k,v in features.iteritems() for fet in v]
+    index_1 = [fet for k,v in features.items() for fet in v]
+    index_2 = [int(k) for k,v in features.items() for fet in v]
     values = [1.0]*len(index_1) 
-    nodes = map(lambda x: int(x),features.keys())
+    nodes = [int(key) for key,value in features.items()]
     node_count = max(nodes)+1
-    features = [map(lambda x: int(x),feature_set) for node, feature_set in features.iteritems()]
-    feature_count = max(map(lambda x: max(x+[0]), features)) + 1
+    features = [[int(feature) for feature in feature_set] for node, feature_set in features.items()]
+    feature_count = max([max(fet+[0]) for fet in  features]) + 1
     features = sparse.csr_matrix(sparse.coo_matrix((values,(index_1,index_2)),shape=(feature_count,node_count),dtype=np.float32))
     return features
 
@@ -137,6 +137,8 @@ def tab_printer(args):
     :param args: Parameters used for the model.
     """
     args = vars(args)
+    keys = sorted(args.keys())
     t = Texttable() 
-    t.add_rows([["Parameter", "Value"]] +  [[k.replace("_"," ").capitalize(),v] for k,v in args.iteritems()])
-    print t.draw()
+    t.add_rows([["Parameter", "Value"]] +  [[k.replace("_"," ").capitalize(),args[k]] for k in keys])
+    print(t.draw())
+
