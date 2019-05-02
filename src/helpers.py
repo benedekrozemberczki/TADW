@@ -1,10 +1,10 @@
-import argparse
-import networkx as nx
-import pandas as pd
-import numpy as np
 import json
-from scipy import sparse
+import argparse
+import numpy as np
+import pandas as pd
 from tqdm import tqdm
+import networkx as nx
+from scipy import sparse
 from texttable import Texttable
 
 def parameter_parser():
