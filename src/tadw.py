@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-import tqdm
 from tqdm import tqdm
 from numpy.linalg import inv
 from scipy import sparse
