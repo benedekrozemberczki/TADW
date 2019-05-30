@@ -46,7 +46,7 @@ def parameter_parser():
     parser.add_argument("--iterations",
                         type = int,
                         default = 200,
-	                help = "Number of gradient descent iterations. Default is 20.")
+	                help = "Number of gradient descent iterations. Default is 200.")
 
     parser.add_argument("--lambd",
                         type = float,
