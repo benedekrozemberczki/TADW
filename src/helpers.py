@@ -45,7 +45,7 @@ def parameter_parser():
 
     parser.add_argument("--iterations",
                         type = int,
-                        default = 20,
+                        default = 200,
 	                help = "Number of gradient descent iterations. Default is 20.")
 
     parser.add_argument("--lambd",
@@ -78,8 +78,13 @@ def normalize_adjacency(graph):
     """
     ind = range(len(graph.nodes()))
     degs = [1.0/graph.degree(node) for node in graph.nodes()]
-    A = sparse.csr_matrix(nx.adjacency_matrix(graph),dtype=np.float32)
-    degs = sparse.csr_matrix(sparse.coo_matrix((degs,(ind,ind)),shape=A.shape,dtype=np.float32))
+    edges = [edge for edge in graph.edges()]
+    index_1 = [edge[0] for edge in edges] + [edge[1] for edge in edges]
+    index_2 = [edge[1] for edge in edges] + [edge[0] for edge in edges]
+    values = [1.0 for edge in edges] + [1.0 for edge in edges]
+    shape = (len(ind),len(ind))
+    A = sparse.coo_matrix((values,(index_1, index_2)),shape=shape,dtype=np.float32)
+    degs = sparse.coo_matrix((degs,(ind,ind)),shape=A.shape,dtype=np.float32)
     A = A.dot(degs)
     return A
 
@@ -128,7 +133,7 @@ def read_sparse_features(feature_path):
     node_count = max(nodes)+1
     features = [[int(feature) for feature in feature_set] for node, feature_set in features.items()]
     feature_count = max([max(fet+[0]) for fet in  features]) + 1
-    features = sparse.csr_matrix(sparse.coo_matrix((values,(index_1,index_2)),shape=(feature_count,node_count),dtype=np.float32))
+    features = sparse.coo_matrix((values,(index_1,index_2)),shape=(feature_count,node_count),dtype=np.float32)
     return features
 
 def tab_printer(args):
