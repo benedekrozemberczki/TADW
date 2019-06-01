@@ -14,7 +14,7 @@ This repository provides an implementation for TADW as described in the paper:
 > IJCAI, 2015.
 > https://www.ijcai.org/Proceedings/15/Papers/299.pdf
 
-The original MatLab implementation is available [[here]](https://github.com/albertyang33/TADW), while another Python implementation is available [[here]](). 
+The original MatLab implementation is available [[here]](https://github.com/albertyang33/TADW), while another Python implementation is available [[here]](https://github.com/thunlp/OpenNE). 
 
 ### Requirements
 
