@@ -83,8 +83,6 @@ class TADW(object):
         self.out = pd.DataFrame(self.W, columns = columns)
         self.out.to_csv(self.args.output_path, index = None)
 
-
-
 class SparseTADW(TADW):
     """
     Sparse Text Attributed DeepWalk Class
@@ -127,9 +125,6 @@ class SparseTADW(TADW):
         """
         return np.concatenate([ids, np.transpose(self.W), self.T.transpose().dot(self.H.transpose())], axis = 1)
 
-
-
-
 class DenseTADW(TADW):
     """
     Dense Text Attributed DeepWalk Class
@@ -168,4 +163,3 @@ class DenseTADW(TADW):
         Saving the embedding on disk.
         """
         return np.concatenate([ids, np.transpose(self.W), np.transpose(np.dot(self.H,self.T))], axis = 1)
-
