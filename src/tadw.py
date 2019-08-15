@@ -97,7 +97,6 @@ class SparseTADW(TADW):
         self.W = self.W-self.args.alpha * grad
         self.W[self.W < self.args.lower_control] = self.args.lower_control
 
-
     def update_H(self):
         """
         A single update of the feature basis matrix.
@@ -137,7 +136,6 @@ class DenseTADW(TADW):
         grad = self.args.lambd*self.W -np.dot(H_T, self.A - np.dot(np.transpose(H_T),self.W))
         self.W = self.W-self.args.alpha * grad
         self.W[self.W < self.args.lower_control] = self.args.lower_control
-
 
     def update_H(self):
         """
