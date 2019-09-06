@@ -98,7 +98,6 @@ def read_graph(edge_path, order):
     A = normalize_adjacency(graph)
     if order > 1:
         powered_A, out_A = A, A
-        
         for power in tqdm(range(order-1)):
             powered_A = powered_A.dot(A)
             out_A = out_A + powered_A
