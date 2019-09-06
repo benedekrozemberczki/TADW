@@ -15,7 +15,6 @@ def parameter_parser():
     """
     parser = argparse.ArgumentParser(description = "Run TADW.")
 
-
     parser.add_argument("--edge-path",
                         nargs = "?",
                         default = "./input/chameleon_edges.csv",
