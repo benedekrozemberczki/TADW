@@ -1,3 +1,5 @@
+"""Data reading and writing."""
+
 import json
 import argparse
 import numpy as np
@@ -13,58 +15,58 @@ def parameter_parser():
     The default hyperparameters give a good quality representation without grid search.
     Representations are sorted by node ID.
     """
-    parser = argparse.ArgumentParser(description = "Run TADW.")
+    parser = argparse.ArgumentParser(description="Run TADW.")
 
     parser.add_argument("--edge-path",
-                        nargs = "?",
-                        default = "./input/chameleon_edges.csv",
-	                help = "Input edges.")
+                        nargs="?",
+                        default="./input/chameleon_edges.csv",
+	                help="Input edges.")
 
     parser.add_argument("--feature-path",
-                        nargs = "?",
-                        default = "./input/chameleon_features.json",
-	                help = "Input features.")
+                        nargs="?",
+                        default="./input/chameleon_features.json",
+	                help="Input features.")
 
     parser.add_argument("--output-path",
-                        nargs = "?",
-                        default = "./output/chameleon_tadw.csv",
-	                help = "Output embedding.")
+                        nargs="?",
+                        default="./output/chameleon_tadw.csv",
+	                help="Output embedding.")
 
     parser.add_argument("--dimensions",
-                        type = int,
-                        default = 32,
-	                help = "Number of dimensions. Default is 32.")
+                        type=int,
+                        default=32,
+	                help="Number of dimensions. Default is 32.")
 
     parser.add_argument("--order",
-                        type = int,
-                        default = 2,
-	                help = "Target matrix approximation order. Default is 2.")
+                        type=int,
+                        default=2,
+	                help="Target matrix approximation order. Default is 2.")
 
     parser.add_argument("--iterations",
-                        type = int,
-                        default = 200,
-	                help = "Number of gradient descent iterations. Default is 200.")
+                        type=int,
+                        default=200,
+	                help="Number of gradient descent iterations. Default is 200.")
 
     parser.add_argument("--lambd",
-                        type = float,
-                        default = 1000.0,
-	                help = "Regularization term coefficient. Default is 1000.")
+                        type=float,
+                        default=1000.0,
+	                help="Regularization term coefficient. Default is 1000.")
 
     parser.add_argument("--alpha",
-                        type = float,
-                        default = 10**-6,
-	                help = "Learning rate. Default is 10^-6.")
+                        type=float,
+                        default=10**-6,
+	                help="Learning rate. Default is 10^-6.")
 
     parser.add_argument("--features",
-                        nargs = "?",
-                        default = "sparse",
-	                help = "Output embedding.")
+                        nargs="?",
+                        default="sparse",
+	                help="Output embedding.")
 
     parser.add_argument("--lower-control",
-                        type = float,
-                        default = 10**-15,
-	                help = "Overflow control. Default is 10**-15.")
-    
+                        type=float,
+                        default=10**-15,
+	                help="Overflow control. Default is 10**-15.")
+
     return parser.parse_args()
 
 def normalize_adjacency(graph):
@@ -79,15 +81,15 @@ def normalize_adjacency(graph):
     index_1 = [edge[0] for edge in edges] + [edge[1] for edge in edges]
     index_2 = [edge[1] for edge in edges] + [edge[0] for edge in edges]
     values = [1.0 for edge in edges] + [1.0 for edge in edges]
-    shape = (len(ind),len(ind))
-    A = sparse.coo_matrix((values,(index_1, index_2)),shape=shape,dtype=np.float32)
-    degs = sparse.coo_matrix((degs,(ind,ind)),shape=A.shape,dtype=np.float32)
+    shape = (len(ind), len(ind))
+    A = sparse.coo_matrix((values, (index_1, index_2)), shape=shape, dtype=np.float32)
+    degs = sparse.coo_matrix((degs, (ind, ind)), shape=A.shape, dtype=np.float32)
     A = A.dot(degs)
     return A
 
 def read_graph(edge_path, order):
     """
-    Method to read graph and create a target matrix with pooled adjacency matrix powers up to the order.
+    Method to read graph and create a target matrix by summing adjacency matrix powers.
     :param edge_path: Path to the ege list.
     :param order: Order of approximations.
     :return out_A: Target matrix.
@@ -97,7 +99,7 @@ def read_graph(edge_path, order):
     A = normalize_adjacency(graph)
     if order > 1:
         powered_A, out_A = A, A
-        for power in tqdm(range(order-1)):
+        for _ in tqdm(range(order-1)):
             powered_A = powered_A.dot(A)
             out_A = out_A + powered_A
     else:
@@ -112,7 +114,7 @@ def read_features(feature_path):
     :return features: Node features.
     """
     features = pd.read_csv(feature_path)
-    features = np.array(features)[:,1:].transpose()
+    features = np.array(features)[:, 1:].transpose()
     return features
 
 def read_sparse_features(feature_path):
@@ -122,14 +124,17 @@ def read_sparse_features(feature_path):
     :return features: Node features.
     """
     features = json.load(open(feature_path))
-    index_1 = [fet for k,v in features.items() for fet in v]
-    index_2 = [int(k) for k,v in features.items() for fet in v]
-    values = [1.0]*len(index_1) 
-    nodes = [int(key) for key,value in features.items()]
+    index_1 = [fet for k, v in features.items() for fet in v]
+    index_2 = [int(k) for k, v in features.items() for fet in v]
+    values = [1.0]*len(index_1)
+    nodes = [int(key) for key, value in features.items()]
     node_count = max(nodes)+1
-    features = [[int(feature) for feature in feature_set] for node, feature_set in features.items()]
-    feature_count = max([max(fet+[0]) for fet in  features]) + 1
-    features = sparse.coo_matrix((values,(index_1,index_2)),shape=(feature_count,node_count),dtype=np.float32)
+    features = [[int(fet) for fet in fet_set] for node, fet_set in features.items()]
+    feature_count = max([max(fet+[0]) for fet in features]) + 1
+
+    features = sparse.coo_matrix((values, (index_1, index_2)),
+                                 shape=(feature_count, node_count),
+                                 dtype=np.float32)
     return features
 
 def tab_printer(args):
@@ -140,5 +145,6 @@ def tab_printer(args):
     args = vars(args)
     keys = sorted(args.keys())
     t = Texttable() 
-    t.add_rows([["Parameter", "Value"]] +  [[k.replace("_"," ").capitalize(),args[k]] for k in keys])
+    t.add_rows([["Parameter", "Value"]])
+    t.add_rows([[k.replace("_", " ").capitalize(), args[k]] for k in keys])
     print(t.draw())
