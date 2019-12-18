@@ -17,7 +17,7 @@ The original MatLab implementation is available [[here]](https://github.com/albe
 
 The codebase is implemented in Python 2.7. package versions used for development are just below.
 ```
-networkx          1.11
+networkx          2.4
 tqdm              4.28.1
 numpy             1.15.4
 pandas            0.23.4
