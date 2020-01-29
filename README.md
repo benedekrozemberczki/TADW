@@ -5,6 +5,8 @@ An implementation of "Network Representation Learning with Rich Text Information
   
 <div style="text-align:center"><img src ="fscnmf.png" ,width=720/></div>
 
+The model is now also available in the package [Karate Club](https://github.com/benedekrozemberczki/karateclub).
+
 This repository provides an implementation for TADW as described in the paper:
 > Network Representation Learning with Rich Text Information.
 > Yang Cheng, Liu Zhiyuan, Zhao Deli, Sun Maosong and Chang Edward Y
