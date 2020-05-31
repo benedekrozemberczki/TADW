@@ -1,5 +1,7 @@
-TADW ![License](https://img.shields.io/github/license/benedekrozemberczki/TADW.svg?color=blue&style=plastic)
+TADW
 ============================================
+![License](https://img.shields.io/github/license/benedekrozemberczki/TADW.svg?color=blue&style=plastic) [![codebeat badge](https://codebeat.co/badges/0ce9432b-8c6b-402d-9270-fbd5247106bf)](https://codebeat.co/projects/github-com-benedekrozemberczki-tadw-master)
+
 <p align="justify">
 An implementation of "Network Representation Learning with Rich Text Information". Text Attribtued Deep Walk (TADW) is a node embedding algorithm which learns an embedding of nodes and fuses the node representations with node attributes. The procedure places nodes in an abstract feature space where information about a fixed order procimity is preserved and attributes of neighbours within the proximity are also part of the representation. TADW learns the joint feature-proximal representations using regularized non-negative matrix factorization. In our implementation we assumed that the proximity matrix used in the approximation is sparse, hence the solution runtime can be linear in the number of nodes for low proximity. For a large proximity order value (which is larger than the graph diameter) the runtime is quadratic. The model can assume that the node-feature matrix is sparse or that it is dense, which changes the runtime considerably. </p>
   
